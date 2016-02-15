@@ -23,4 +23,4 @@ Utilizando somente a plataforma JavaEE
 [forge]:http://forge.jboss.org/download
 [casa-do-codigo]:https://www.casadocodigo.com.br/
 [maven]:https://maven.apache.org/download.cgi
-[intellij]:[https://www.jetbrains.com/idea/]
+[intellij]:https://www.jetbrains.com/idea/

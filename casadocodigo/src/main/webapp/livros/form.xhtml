@@ -1,4 +1,4 @@
-<html xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
 
         <h:form>
@@ -21,6 +21,13 @@
             <div>
                 <h:outputLabel>Preço</h:outputLabel>
                 <h:inputText value="#{adminBooksBean.product.price}"/>
+            </div>
+
+
+            <div>
+                <h:selectManyListbox value="#{adminBooksBean.selectedAuthorsIds}" converter="javax.faces.Integer">
+                    <f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author.id}" itemLabel="#{author.name}"/>
+                </h:selectManyListbox>
             </div>
 
             <h:commandButton value="Gravar" action="#{adminBooksBean.save}"/>

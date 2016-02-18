@@ -30,10 +30,10 @@ public class AdminBooksBean {
     private List<Integer> selectedAuthorsIds = new ArrayList<>();
 
     @Transactional
-    public void save(){
+    public String  save(){
         populateBookAuthor();
         bookDAO.save(product);
-        clearObjects();
+        return "/livros/list?faces-redirect=true";
     }
 
     public Book getProduct() {
@@ -65,11 +65,5 @@ public class AdminBooksBean {
                         System.out.println(author);
                         return author;
                     }).forEach(product::add);
-    }
-
-
-    private void clearObjects(){
-        this.product = new Book();
-        this.selectedAuthorsIds.clear();
     }
 }

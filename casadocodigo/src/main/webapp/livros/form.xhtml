@@ -1,31 +1,37 @@
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
 
+        <h:messages/>
+
         <h:form>
             <div>
                 <h:outputLabel>Título</h:outputLabel>
-                <h:inputText value="#{adminBooksBean.product.title}"/>
+                <h:inputText value="#{adminBooksBean.product.title}" required="true"/>
             </div>
 
             <div>
                 <h:outputLabel>Descrição</h:outputLabel>
-                <h:inputTextarea cols="20" rows="10" value="#{adminBooksBean.product.description}"/>
+                <h:inputTextarea cols="20" rows="10" value="#{adminBooksBean.product.description}" required="true"/>
             </div>
 
             <div>
                 <h:outputLabel>Nº de Páginas</h:outputLabel>
-                <h:inputText value="#{adminBooksBean.product.numberOfPages}"/>
+                <h:inputText value="#{adminBooksBean.product.numberOfPages}" required="true">
+                    <f:validateLongRange minimum="80"/>
+                </h:inputText>
             </div>
 
 
             <div>
                 <h:outputLabel>Preço</h:outputLabel>
-                <h:inputText value="#{adminBooksBean.product.price}"/>
+                <h:inputText value="#{adminBooksBean.product.price}" required="true">
+                    <f:validateDoubleRange minimum="10" maximum="100"/>
+                </h:inputText>
             </div>
 
 
             <div>
-                <h:selectManyListbox value="#{adminBooksBean.selectedAuthorsIds}" converter="javax.faces.Integer">
+                <h:selectManyListbox value="#{adminBooksBean.selectedAuthorsIds}" converter="javax.faces.Integer" required="true">
                     <f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author.id}" itemLabel="#{author.name}"/>
                 </h:selectManyListbox>
             </div>

@@ -1,0 +1,30 @@
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:body>
+
+        <h:dataTable value="#{adminListBookBeans.books}" var="book">
+
+            <h:column>
+                <f:facet name="header">Título</f:facet>
+                #{book.title}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Nº de Páginas</f:facet>
+                #{book.numberOfPages}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Autores</f:facet>
+                <ui:repeat value="#{book.authors}" var="author" varStatus="status">
+                    #{author.name} <h:outputText value="|" rendered="#{not status.last}"/>
+
+                </ui:repeat>
+            </h:column>
+
+        </h:dataTable>
+
+    </h:body>
+</html>

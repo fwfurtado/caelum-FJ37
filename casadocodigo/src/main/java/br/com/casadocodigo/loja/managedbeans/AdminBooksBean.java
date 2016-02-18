@@ -2,13 +2,13 @@ package br.com.casadocodigo.loja.managedbeans;
 
 import br.com.casadocodigo.loja.daos.AuthorDAO;
 import br.com.casadocodigo.loja.daos.BookDAO;
+import br.com.casadocodigo.loja.infra.MessagesHelper;
 import br.com.casadocodigo.loja.models.Author;
 import br.com.casadocodigo.loja.models.Book;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -31,14 +31,15 @@ public class AdminBooksBean {
     private List<Author> authors = new ArrayList<>();
     private List<Integer> selectedAuthorsIds = new ArrayList<>();
 
+    @Inject
+    private MessagesHelper messageHelper;
+
     @Transactional
     public String  save(){
         populateBookAuthor();
         bookDAO.save(product);
 
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().getFlash().setKeepMessages(true);
-        context.addMessage(null, new FacesMessage("Livro cadastrado com sucesso"));
+        messageHelper.addFlash(new FacesMessage("Livro cadastrado com sucesso"));
 
         return "/livros/list?faces-redirect=true";
     }

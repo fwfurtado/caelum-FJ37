@@ -22,7 +22,7 @@ public class AdminListBookBeans {
 
 
     @PostConstruct
-    public void load(){
+    private void load(){
         books = bookDAO.list();
     }
 

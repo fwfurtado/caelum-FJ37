@@ -53,7 +53,7 @@ public class AdminBooksBean {
     }
 
     @PostConstruct
-    public void load(){
+    private void load(){
         this.authors = authorDAO.list();
     }
 

@@ -7,6 +7,8 @@ import br.com.casadocodigo.loja.models.Book;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -33,6 +35,11 @@ public class AdminBooksBean {
     public String  save(){
         populateBookAuthor();
         bookDAO.save(product);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        context.addMessage(null, new FacesMessage("Livro cadastrado com sucesso"));
+
         return "/livros/list?faces-redirect=true";
     }
 

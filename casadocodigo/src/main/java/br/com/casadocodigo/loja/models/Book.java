@@ -1,6 +1,12 @@
 package br.com.casadocodigo.loja.models;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +20,22 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotBlank
     private String title;
+
+    @NotBlank
+    @Length(min = 10)
     private String description;
+
+    @Min(50)
     private int numberOfPages;
+
+    @DecimalMin("20")
     private BigDecimal price;
 
     @ManyToMany
+    @Size(min = 1)
     private List<Author> authors = new ArrayList<>();
 
     public Integer getId() {

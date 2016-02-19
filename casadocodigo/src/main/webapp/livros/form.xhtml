@@ -1,39 +1,44 @@
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
 
-        <h:messages/>
 
-        <h:form>
+
+        <h:form prependId="false">
             <div>
                 <h:outputLabel>Título</h:outputLabel>
-                <h:inputText value="#{adminBooksBean.product.title}" required="true"/>
+                <h:inputText value="#{adminBooksBean.product.title}" required="true" id="titulo"/>
+                <h:message for="titulo"/>
             </div>
 
             <div>
                 <h:outputLabel>Descrição</h:outputLabel>
-                <h:inputTextarea cols="20" rows="10" value="#{adminBooksBean.product.description}" required="true"/>
+                <h:inputTextarea cols="20" rows="10" value="#{adminBooksBean.product.description}" required="true" id="descricao"/>
+                <h:message for="descricao"/>
             </div>
 
             <div>
                 <h:outputLabel>Nº de Páginas</h:outputLabel>
-                <h:inputText value="#{adminBooksBean.product.numberOfPages}" required="true">
+                <h:inputText value="#{adminBooksBean.product.numberOfPages}" required="true" id="paginas">
                     <f:validateLongRange minimum="80"/>
                 </h:inputText>
+                <h:message for="paginas"/>
             </div>
 
 
             <div>
                 <h:outputLabel>Preço</h:outputLabel>
-                <h:inputText value="#{adminBooksBean.product.price}" required="true">
+                <h:inputText value="#{adminBooksBean.product.price}" required="true" id="preco">
                     <f:validateDoubleRange minimum="10" maximum="100"/>
                 </h:inputText>
+                <h:message for="preco"/>
             </div>
 
 
             <div>
-                <h:selectManyListbox value="#{adminBooksBean.selectedAuthorsIds}" converter="javax.faces.Integer" required="true">
+                <h:selectManyListbox value="#{adminBooksBean.selectedAuthorsIds}" converter="javax.faces.Integer" required="true" id="autores">
                     <f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author.id}" itemLabel="#{author.name}"/>
                 </h:selectManyListbox>
+                <h:message for="autores"/>
             </div>
 
             <h:commandButton value="Gravar" action="#{adminBooksBean.save}"/>

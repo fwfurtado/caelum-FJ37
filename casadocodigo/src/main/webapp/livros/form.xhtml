@@ -1,4 +1,4 @@
-<html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:body>
 
 
@@ -14,6 +14,12 @@
                 <h:outputLabel>Descrição</h:outputLabel>
                 <h:inputTextarea cols="20" rows="10" value="#{adminBooksBean.product.description}"  id="descricao"/>
                 <h:message for="descricao"/>
+            </div>
+
+            <div>
+                <h:outputLabel>Data de Lançamento</h:outputLabel>
+                <h:inputText value="#{adminBooksBean.product.releaseDate}" pt:type="date" id="date"/>
+                <h:message for="date"/>
             </div>
 
             <div>

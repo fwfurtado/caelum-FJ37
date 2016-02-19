@@ -4,11 +4,10 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -37,6 +36,11 @@ public class Book {
     @ManyToMany
     @Size(min = 1)
     private List<Author> authors = new ArrayList<>();
+
+    @Future
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    private Calendar releaseDate;
 
     public Integer getId() {
         return id;
@@ -100,5 +104,13 @@ public class Book {
                 ", numberOfPages=" + numberOfPages +
                 ", price=" + price +
                 '}';
+    }
+
+    public void setReleaseDate(Calendar releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public Calendar getReleaseDate() {
+        return releaseDate;
     }
 }

@@ -29,14 +29,13 @@ public class AdminBooksBean {
     private AuthorDAO authorDAO;
 
     private List<Author> authors = new ArrayList<>();
-    private List<Integer> selectedAuthorsIds = new ArrayList<>();
 
     @Inject
     private MessagesHelper messageHelper;
 
     @Transactional
     public String  save(){
-        populateBookAuthor();
+
         bookDAO.save(product);
 
         messageHelper.addFlash(new FacesMessage("Livro cadastrado com sucesso"));
@@ -52,13 +51,6 @@ public class AdminBooksBean {
         return authors;
     }
 
-    public List<Integer> getSelectedAuthorsIds() {
-        return selectedAuthorsIds;
-    }
-
-    public void setSelectedAuthorsIds(List<Integer> selectedAuthorsIds) {
-        this.selectedAuthorsIds = selectedAuthorsIds;
-    }
 
     @PostConstruct
     private void load(){
@@ -66,12 +58,5 @@ public class AdminBooksBean {
     }
 
 
-    private void populateBookAuthor(){
-        selectedAuthorsIds.stream()
-                .map((id)->{
-                        Author author = new Author(id);
-                        System.out.println(author);
-                        return author;
-                    }).forEach(product::add);
-    }
+
 }

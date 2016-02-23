@@ -38,8 +38,8 @@
 
 
             <div>
-                <h:selectManyListbox value="#{adminBooksBean.selectedAuthorsIds}" converter="javax.faces.Integer"  id="autores">
-                    <f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author.id}" itemLabel="#{author.name}"/>
+                <h:selectManyListbox value="#{adminBooksBean.product.authors}" converter="entityConverter"  id="autores">
+                    <f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author}" itemLabel="#{author.name}"/>
                 </h:selectManyListbox>
                 <h:message for="autores"/>
             </div>

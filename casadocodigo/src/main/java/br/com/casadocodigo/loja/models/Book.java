@@ -91,9 +91,7 @@ public class Book {
     }
 
 
-    public void add( Author author){
-        this.authors.add(author);
-    }
+
 
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 # Curso Plataforma JavaEE (FJ-37) #
 ---
-Instrutor [Cassio Almeida][mail-instrutor]
+Instrutor [Cassio Almeida][mail-cassio], [Alberto Souza][mail-alberto]
 
 [Avaliação] [avaliacao]
 
@@ -19,7 +19,8 @@ Utilizando somente a plataforma JavaEE
 + [IntelliJ][intellij] (IDE)
 
 [avaliacao]:https://sistema.caelum.com.br/avaliacao/807bd74
-[mail-instrutor]:mailto:cassio.almeida@caelum.com
+[mail-cassio]:mailto:cassio.almeida@caelum.com
+[mail-alberto]:mailto:alberto.souza@caelum.com
 [forge]:http://forge.jboss.org/download
 [casa-do-codigo]:https://www.casadocodigo.com.br/
 [maven]:https://maven.apache.org/download.cgi

@@ -42,6 +42,9 @@ public class Book {
     @Temporal(TemporalType.DATE)
     private Calendar releaseDate;
 
+    private String summaryPath;
+    private String coverPath;
+
     public Integer getId() {
         return id;
     }
@@ -110,5 +113,21 @@ public class Book {
 
     public Calendar getReleaseDate() {
         return releaseDate;
+    }
+
+    public void setSummaryPath(String summaryPath) {
+        this.summaryPath = summaryPath;
+    }
+
+    public String getSummaryPath() {
+        return summaryPath;
+    }
+
+    public void setCoverPath(String  coverPath) {
+        this.coverPath = coverPath;
+    }
+
+    public String  getCoverPath() {
+        return coverPath;
     }
 }

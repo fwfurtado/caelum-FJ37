@@ -1,16 +1,13 @@
 package br.com.casadocodigo.loja.models;
 
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 
 @Named
 @SessionScoped
@@ -61,14 +58,5 @@ public class ShoppingCart implements Serializable {
 		return items.isEmpty();
 	}
 
-	public String toJson() {
-		JsonArrayBuilder itens = Json.createArrayBuilder();
-		for (ShoppingItem item : getList()) {
-			itens.add(Json.createObjectBuilder().add("title", item.getBook().getTitle())
-					.add("price", item.getBook().getPrice()).add("quantity", getQuantity(item).intValue())
-					.add("sum", getTotal(item)));
-
-		}
-		return itens.build().toString();
-	}
+	
 }

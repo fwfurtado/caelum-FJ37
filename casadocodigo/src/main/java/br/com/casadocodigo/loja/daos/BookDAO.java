@@ -16,6 +16,13 @@ public class BookDAO {
     @PersistenceContext
     private EntityManager manager;
 
+    @Deprecated
+    public BookDAO() {}
+
+    public BookDAO(EntityManager manager){
+        this.manager = manager;
+    }
+
 
     public void save(Book book){
         manager.persist(book);

@@ -98,7 +98,9 @@
 		</p>
 
 		<p></p>
-		<p>Data de publicação: #{productDetailBean.book.releaseDate.time}</p>
+		<p>Data de publicação: 	<h:outputText value="#{productDetailBean.book.releaseDate.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText></p>
 
 	</section>
     <form action="/cart/add" method="post" class="container">

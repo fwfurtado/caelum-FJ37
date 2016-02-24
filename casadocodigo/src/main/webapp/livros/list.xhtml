@@ -28,16 +28,16 @@
 
             <h:column>
                 <f:facet name="header">Sumário</f:facet>
-                <h:outputLink value="#{request.contextPath}/#{book.summaryPath}">
-                    #{book.summaryPath}
+                <h:outputLink value="#{book.summaryPath}" rendered="#{book.summaryPath != null}">
+                    Sumário
                 </h:outputLink>
             </h:column>
 
 
             <h:column>
                 <f:facet name="header">Capa</f:facet>
-                <h:outputLink value="#{request.contextPath}/#{book.coverPath}">
-                    #{book.coverPath}
+                <h:outputLink value="#{book.coverPath}" rendered="#{book.coverPath != null}">
+                    Capa
                 </h:outputLink>
             </h:column>
 

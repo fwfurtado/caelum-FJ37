@@ -1,4 +1,4 @@
-package br.com.casadocodigo.loja.managedbeans;
+package br.com.casadocodigo.loja.managedbeans.site;
 
 import br.com.casadocodigo.loja.daos.BookDAO;
 import br.com.casadocodigo.loja.models.Book;

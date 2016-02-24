@@ -33,4 +33,8 @@ public class BookDAO {
     public List<Book> olderBooks() {
         return manager.createQuery("select b from Book b", Book.class).setMaxResults(20).getResultList();
     }
+
+    public Book findById(Integer id) {
+        return manager.find(Book.class, id);
+    }
 }

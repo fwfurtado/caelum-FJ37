@@ -103,7 +103,7 @@
 								</h:outputText></p>
 
 	</section>
-    <form action="/cart/add" method="post" class="container">
+    <form jsf:id="form"  method="post" class="container">
     <ul id="variants" class="clearfix">
     	  <li class="buy-option">
             <input type="radio" name="id" class="variant-radio" 
@@ -125,7 +125,8 @@
           </li>
     </ul>
 
-    <button type="submit" class="submit-image icon-basket-alt" 
+    <button type="submit" class="submit-image icon-basket-alt"
+			jsf:action="#{shoppingCartBean.add(productDetailBean.id)}"
     	title="#{productDetailBean.book.title}"></button>
   </form>
 </body>

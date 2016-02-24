@@ -1,5 +1,8 @@
 package br.com.casadocodigo.loja.infra;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -15,26 +18,22 @@ public class FileSaver {
     @Inject
     private HttpServletRequest request;
 
+    @Inject
+    private AmazonS3Client s3;
+
     private static final String CONTENT_DISPOSITION="content-disposition";
     private static final String FILENAME_KEY="filename=";
 
     public String write(String baseFolder, Part multipartFile){
-        String serverPath = request.getServletContext().getRealPath("/" + baseFolder);
         String filename = extractFilename( multipartFile.getHeader(CONTENT_DISPOSITION));
-        String path = serverPath + "/" + filename;
-
-        System.out.println("\n\n\n\n\n");
-        System.out.println(path);
-        System.out.println("\n\n\n\n\n");
 
         try{
-            multipartFile.write(path);
+            s3.putObject("casadocodigo",  baseFolder + "-" + filename, multipartFile.getInputStream(), new ObjectMetadata());
+            return "http://localhost:9444/s3/casadocodigo/" + baseFolder + "-" + filename + "?noAuth=true";
         }catch (IOException e){
             throw new RuntimeException(e);
         }
 
-
-        return baseFolder +"/"+ filename;
     }
 
     private String extractFilename(String contentDisposition) {

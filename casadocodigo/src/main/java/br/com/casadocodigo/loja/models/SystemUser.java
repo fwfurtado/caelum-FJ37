@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.models;
 
+import br.com.casadocodigo.loja.models.validation.group.BuyerGroup;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
@@ -20,33 +21,33 @@ public class SystemUser {
     @Column(unique = true)
     private String email;
 
-    @NotBlank
+    @NotBlank(groups=BuyerGroup.class)
     private String firstName;
 
-    @NotBlank
+    @NotBlank(groups = BuyerGroup.class)
     private String lastName;
 
     @CPF
-    @NotBlank
+    @NotBlank(groups = BuyerGroup.class)
     @Column(unique = true)
     private String socialId;
 
-    @NotBlank
+    @NotBlank(groups = BuyerGroup.class)
     private String address;
 
-    @NotBlank
+    @NotBlank(groups = BuyerGroup.class)
     private String city;
 
-    @NotBlank
+    @NotBlank(groups = BuyerGroup.class)
     private String state;
 
-    @NotBlank
+    @NotBlank(groups = BuyerGroup.class)
     private String postalCode;
 
-    @NotBlank
+    @NotBlank(groups = BuyerGroup.class)
     private String phone;
 
-    @NotBlank
+    @NotBlank(groups = BuyerGroup.class)
     private String country;
 
     private String password;

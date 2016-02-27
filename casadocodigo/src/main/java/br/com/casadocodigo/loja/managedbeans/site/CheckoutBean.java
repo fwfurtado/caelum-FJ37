@@ -2,6 +2,7 @@ package br.com.casadocodigo.loja.managedbeans.site;
 
 import br.com.casadocodigo.loja.daos.CheckoutDAO;
 import br.com.casadocodigo.loja.daos.SystemUserDAO;
+import br.com.casadocodigo.loja.managedbeans.services.PaymentGateway;
 import br.com.casadocodigo.loja.models.Checkout;
 import br.com.casadocodigo.loja.models.ShoppingCart;
 import br.com.casadocodigo.loja.models.SystemUser;
@@ -27,6 +28,9 @@ public class CheckoutBean {
     @Inject
     private ShoppingCart cart;
 
+    @Inject
+    private PaymentGateway paymentGateway;
+
     public SystemUser getSystemUser() {
         return systemUser;
     }
@@ -36,9 +40,14 @@ public class CheckoutBean {
     }
 
     @Transactional
-    public void checkout(){
+    public void checkout() {
         systemUserDAO.save(systemUser);
         Checkout checkout = new Checkout(systemUser, cart);
         checkoutDAO.save(checkout);
+
+        String resultado = paymentGateway.pay(cart.getTotal());
+
+        System.out.println(resultado);
+
     }
 }

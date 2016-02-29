@@ -2,6 +2,7 @@ package br.com.casadocodigo.loja.models;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Created by Nando on 25/02/16.
@@ -18,6 +19,8 @@ public class Checkout {
     private BigDecimal value;
 
     private String jsonCart;
+
+    private String uuid;
 
     @Deprecated
     protected Checkout(){}
@@ -60,4 +63,18 @@ public class Checkout {
     public void setJsonCart(String jsonCart) {
         this.jsonCart = jsonCart;
     }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    @PrePersist
+    public void prePersist(){
+        this.uuid = UUID.randomUUID().toString();
+    }
+
 }

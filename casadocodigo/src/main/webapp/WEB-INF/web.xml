@@ -5,6 +5,12 @@
          version="3.1">
     <display-name>casadocodigo</display-name>
 
+
+    <context-param>
+        <param-name>resteasy.media.type.mappings</param-name>
+        <param-value>json: application/json, xml: application/xml</param-value>
+    </context-param>
+
     <servlet>
         <servlet-name>jsf</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

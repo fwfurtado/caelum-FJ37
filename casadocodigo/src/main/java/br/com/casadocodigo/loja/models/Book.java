@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +16,8 @@ import java.util.List;
  */
 @Cacheable
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Book {
 
     @Id
@@ -36,6 +39,8 @@ public class Book {
 
     @ManyToMany
     @Size(min = 1)
+    @XmlElement(name="authors")
+    @XmlElementWrapper(name = "authors")
     private List<Author> authors = new ArrayList<>();
 
     @Future

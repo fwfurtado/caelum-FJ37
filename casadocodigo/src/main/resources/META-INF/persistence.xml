@@ -9,6 +9,7 @@
             <persistence-unit name="casadocodigo-dev" transaction-type="JTA">
                 <description>Dev persistence unit</description>
                 <provider>org.hibernate.ejb.HibernatePersistence</provider>
+                <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
                 <jta-data-source>java:jboss/datasources/casadocodigoDS</jta-data-source>
 
@@ -17,6 +18,11 @@
                     <property name="hibernate.show_sql"     value="true"/>
                     <property name="hibernate.format_sql"   value="true"/>
                     <property name="hibernate.dialect"      value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+
+                    <!--Cache-->
+                    <property name="hibernate.cache.use_query_cache" value="true"/>
+                    <property name="hibernate.cache.infinspan.br.com.casadocodigo.loja.models.Book.expiration.lifespan"
+                              value="900000"/>
                 </properties>
             </persistence-unit>
 

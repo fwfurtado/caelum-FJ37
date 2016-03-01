@@ -1,6 +1,7 @@
 package br.com.casadocodigo.loja.daos;
 
 import br.com.casadocodigo.loja.models.Book;
+import org.hibernate.jpa.QueryHints;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.EntityManager;
@@ -33,7 +34,11 @@ public class BookDAO {
     }
 
     public List<Book> lastReleases() {
-        return manager.createQuery("select b from Book b where b.releaseDate <= CURRENT_DATE order by b.releaseDate desc ", Book.class).setMaxResults(3).getResultList();
+        return manager
+                .createQuery("select b from Book b where b.releaseDate <= CURRENT_DATE order by b.releaseDate desc ", Book.class)
+                .setMaxResults(3)
+                .setHint(QueryHints.HINT_CACHEABLE, true)
+                .getResultList();
     }
 
 

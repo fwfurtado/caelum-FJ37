@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Created by Nando on 15/02/16.
  */
+@Cacheable
 @Entity
 public class Book {
 

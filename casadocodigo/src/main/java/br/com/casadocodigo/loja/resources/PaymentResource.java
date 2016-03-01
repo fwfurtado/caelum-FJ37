@@ -1,6 +1,7 @@
 package br.com.casadocodigo.loja.resources;
 
 import br.com.casadocodigo.loja.daos.CheckoutDAO;
+import br.com.casadocodigo.loja.infra.MailSender;
 import br.com.casadocodigo.loja.managedbeans.services.PaymentGateway;
 import br.com.casadocodigo.loja.models.Checkout;
 
@@ -31,6 +32,8 @@ public class PaymentResource {
     @Resource(name = "java:comp/DefaultManagedExecutorService")
     private ManagedExecutorService executor;
 
+    @Inject
+    private MailSender mailSender;
 
     @Inject
     private CheckoutDAO checkoutDAO;
@@ -55,7 +58,14 @@ public class PaymentResource {
             try {
                 paymentGateway.pay(value);
 
-                System.out.println(contextPath);
+                String mailBody = "Nova compra. Seu código de acompanhamento é " + checkout.getUuid();
+
+                mailSender.send(    "cursofj37@gmail.com",
+                                    checkout.getBuyer().getEmail(),
+                                    "Compra realizada com sucesso",
+                                    mailBody
+                                );
+
 
                 URI requestURI = UriBuilder
                                     .fromUri(contextPath + "/site/index.xhtml")

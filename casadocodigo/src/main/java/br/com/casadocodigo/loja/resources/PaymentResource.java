@@ -4,6 +4,8 @@ import br.com.casadocodigo.loja.daos.CheckoutDAO;
 import br.com.casadocodigo.loja.managedbeans.services.PaymentGateway;
 import br.com.casadocodigo.loja.models.Checkout;
 
+import javax.annotation.Resource;
+import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.ws.rs.POST;
@@ -17,8 +19,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.math.BigDecimal;
 import java.net.URI;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by Nando on 29/02/16.
@@ -27,7 +27,9 @@ import java.util.concurrent.Executors;
 @Path("payment")
 public class PaymentResource {
 
-    private static ExecutorService executor = Executors.newFixedThreadPool(50);
+
+    @Resource(name = "java:comp/DefaultManagedExecutorService")
+    private ManagedExecutorService executor;
 
 
     @Inject
@@ -45,12 +47,15 @@ public class PaymentResource {
         String contextPath = context.getContextPath();
 
         executor.submit(()->{
+
             Checkout checkout = checkoutDAO.findByUuid(uuid);
 
             BigDecimal value = checkout.getValue();
 
             try {
                 paymentGateway.pay(value);
+
+                System.out.println(contextPath);
 
                 URI requestURI = UriBuilder
                                     .fromUri(contextPath + "/site/index.xhtml")

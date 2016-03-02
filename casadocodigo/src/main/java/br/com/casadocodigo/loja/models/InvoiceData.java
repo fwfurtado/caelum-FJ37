@@ -15,7 +15,7 @@ public class InvoiceData {
         buyerEmail = checkout.getBuyer().getEmail();
     }
 
-    public BigDecimal getValue() {
+    public BigDecimal getValue() {w
         return value;
     }
 

@@ -1,13 +1,15 @@
 package br.com.casadocodigo.loja.resources;
 
 import br.com.casadocodigo.loja.daos.CheckoutDAO;
-import br.com.casadocodigo.loja.infra.MailSender;
 import br.com.casadocodigo.loja.managedbeans.services.PaymentGateway;
 import br.com.casadocodigo.loja.models.Checkout;
 
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.inject.Inject;
+import javax.jms.Destination;
+import javax.jms.JMSContext;
+import javax.jms.JMSProducer;
 import javax.servlet.ServletContext;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -33,7 +35,10 @@ public class PaymentResource {
     private ManagedExecutorService executor;
 
     @Inject
-    private MailSender mailSender;
+    private JMSContext jmsContext;
+
+    @Resource(name = "java:/jms/topics/checkoutTopic")
+    private Destination checkoutTopic;
 
     @Inject
     private CheckoutDAO checkoutDAO;
@@ -49,23 +54,19 @@ public class PaymentResource {
     public void pay(@Suspended final AsyncResponse ar, @QueryParam("uuid") String uuid){
         String contextPath = context.getContextPath();
 
+        Checkout checkout = checkoutDAO.findByUuid(uuid);
+
+        JMSProducer producer = jmsContext.createProducer();
+
         executor.submit(()->{
 
-            Checkout checkout = checkoutDAO.findByUuid(uuid);
 
             BigDecimal value = checkout.getValue();
 
             try {
                 paymentGateway.pay(value);
 
-                String mailBody = "Nova compra. Seu código de acompanhamento é " + checkout.getUuid();
-
-                mailSender.send(    "cursofj37@gmail.com",
-                                    checkout.getBuyer().getEmail(),
-                                    "Compra realizada com sucesso",
-                                    mailBody
-                                );
-
+                producer.send(checkoutTopic, checkout.getUuid());
 
                 URI requestURI = UriBuilder
                                     .fromUri(contextPath + "/site/index.xhtml")

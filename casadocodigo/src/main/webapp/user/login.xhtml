@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <form method="post" action="#{request.getContextPath()}/j_security_check">
+            <div>
+                <label for="mail">E-mail</label>
+                <input id="mail" type="text" name="j_username" value="#{param.j_username}"/>
+            </div>
+
+            <div>
+                <label for="password">Password</label>
+                <input id="password" name="j_password" value="#{param.j_password}"/>
+            </div>
+            <input type="submit" value="Login"/>
+        </form>
+    </body>
+</html>

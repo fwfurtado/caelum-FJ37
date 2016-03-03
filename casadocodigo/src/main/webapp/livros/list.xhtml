@@ -4,6 +4,10 @@
 
     <h:body>
 
+        <div>
+            Seja bem vindo, #{currentUser.get().email}
+        </div>
+
         <h:messages/>
 
         <h:dataTable value="#{adminListBookBeans.books}" var="book">

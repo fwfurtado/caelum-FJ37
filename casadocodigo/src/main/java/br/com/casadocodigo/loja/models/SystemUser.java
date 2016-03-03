@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Nando on 24/02/16.
@@ -51,6 +52,9 @@ public class SystemUser {
     private String country;
 
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<SystemRole> roles;
 
 
     public Integer getId() {
@@ -147,5 +151,13 @@ public class SystemUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<SystemRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SystemRole> roles) {
+        this.roles = roles;
     }
 }

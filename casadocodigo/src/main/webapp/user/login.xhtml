@@ -1,22 +1,40 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-    >
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
     <h:head>
 
     </h:head>
     <h:body>
-        <h:form method="post" action="#{request.getContextPath()}/j_security_check" prependId="false">
-            <div>
-                <p:outputLabel>E-mail</p:outputLabel>
-                <p:inputText id="j_username" value="#{param.j_username}"/>
-            </div>
+        <h:messages/>
 
-            <div>
-                <p:outputLabel>Password</p:outputLabel>
-                <p:password id="j_password" value="#{param.j_password}"/>
-            </div>
+        <div class="ui-grid ui-grid-responsive">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"></div>
+                <div class="ui-grid-col-4">
+                    <!--<h:form pt:method="get" pt:action="#{request.getContextPath()}/j_security" prependId="false">-->
+                    <h:form prependId="false">
 
-            <p:commandButton accesskey="#{loginBean.login}" ajax="false"/>
-        </h:form>
+                        <p:panelGrid columns="2" >
+                            <f:facet name="header">Login</f:facet>
+
+                            <p:outputLabel>E-mail</p:outputLabel>
+                            <p:inputText value="#{loginBean.username}" />
+
+
+                            <p:outputLabel>Password</p:outputLabel>
+                            <p:password value="#{loginBean.password}" />
+
+
+                            <f:facet name="footer">
+                                <p:commandButton action="#{loginBean.login()}" type="submit" value="Login" ajax="false"/>
+                            </f:facet>
+                        </p:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
     </h:body>
 </html>

@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.listeners.checkout;
 
+import br.com.casadocodigo.loja.configuration.ConfigureJMSDestinations;
 import br.com.casadocodigo.loja.daos.CheckoutDAO;
 import br.com.casadocodigo.loja.models.Checkout;
 import br.com.casadocodigo.loja.services.InvoiceGenerator;
@@ -19,7 +20,7 @@ import javax.jms.TextMessage;
 
 @MessageDriven(
         activationConfig = {
-                @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:/jms/topics/checkoutTopic")
+                @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = ConfigureJMSDestinations.CHECKOUT_TOPIC_JNDI)
         }
 )
 

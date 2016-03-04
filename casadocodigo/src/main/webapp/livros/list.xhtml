@@ -1,7 +1,10 @@
 <html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
+    <h:head>
+
+    </h:head>
     <h:body>
 
         <div>
@@ -10,42 +13,37 @@
 
         <h:messages/>
 
-        <h:dataTable value="#{adminListBookBeans.books}" var="book">
+        <p:dataTable value="#{adminListBookBeans.books}" var="book" rowIndexVar="status">
 
-            <h:column>
-                <f:facet name="header">Título</f:facet>
+            <p:column headerText="Título">
                 #{book.title}
-            </h:column>
+            </p:column>
 
-            <h:column>
-                <f:facet name="header">Nº de Páginas</f:facet>
+            <p:column headerText="Nº de Páginas">
                 #{book.numberOfPages}
-            </h:column>
+            </p:column>
 
-            <h:column>
-                <f:facet name="header">Autores</f:facet>
+            <p:column headerText="Autores">
+
                 <ui:repeat value="#{book.authors}" var="author" varStatus="status">
                     #{author.name} <h:outputText value="|" rendered="#{not status.last}"/>
-
                 </ui:repeat>
-            </h:column>
+            </p:column>
 
-            <h:column>
-                <f:facet name="header">Sumário</f:facet>
+            <p:column headerText="Sumário">
                 <h:outputLink value="#{book.summaryPath}" rendered="#{book.summaryPath != null}">
                     Sumário
                 </h:outputLink>
-            </h:column>
+            </p:column>
 
 
-            <h:column>
-                <f:facet name="header">Capa</f:facet>
-                <h:outputLink value="#{book.coverPath}" rendered="#{book.coverPath != null}">
+            <p:column headerText="Capa">
+                <h:outputLink value="#{book.coverPath}"  rendered="#{book.coverPath != null}">
                     Capa
                 </h:outputLink>
-            </h:column>
+            </p:column>
 
-        </h:dataTable>
+        </p:dataTable>
 
     </h:body>
 </html>

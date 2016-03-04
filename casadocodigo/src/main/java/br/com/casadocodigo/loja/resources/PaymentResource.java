@@ -1,8 +1,6 @@
 package br.com.casadocodigo.loja.resources;
 
-import br.com.casadocodigo.loja.daos.CheckoutDAO;
-import br.com.casadocodigo.loja.managedbeans.services.PaymentGateway;
-import br.com.casadocodigo.loja.models.Checkout;
+import br.com.casadocodigo.loja.configuration.ConfigureJMSDestinations;
 
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
@@ -20,7 +18,6 @@ import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import java.math.BigDecimal;
 import java.net.URI;
 
 /**
@@ -37,14 +34,8 @@ public class PaymentResource {
     @Inject
     private JMSContext jmsContext;
 
-    @Resource(name = "java:/jms/topics/checkoutTopic")
-    private Destination checkoutTopic;
-
-    @Inject
-    private CheckoutDAO checkoutDAO;
-
-    @Inject
-    private PaymentGateway paymentGateway;
+    @Resource(name = ConfigureJMSDestinations.PAYMENT_INTEGRATION_QUEUE_JNDI)
+    private Destination paymentQueue;
 
     @Context
     private ServletContext context;
@@ -54,19 +45,15 @@ public class PaymentResource {
     public void pay(@Suspended final AsyncResponse ar, @QueryParam("uuid") String uuid){
         String contextPath = context.getContextPath();
 
-        Checkout checkout = checkoutDAO.findByUuid(uuid);
-
         JMSProducer producer = jmsContext.createProducer();
 
         executor.submit(()->{
 
-
-            BigDecimal value = checkout.getValue();
-
             try {
-                paymentGateway.pay(value);
 
-                producer.send(checkoutTopic, checkout.getUuid());
+                System.out.println("        ******** Enviado para fila de Pagamentos ********        ");
+                producer.send(paymentQueue, uuid);
+                System.out.println("        ******** Pagamento Concluído com sucesso ********        ");
 
                 URI requestURI = UriBuilder
                                     .fromUri(contextPath + "/site/index.xhtml")

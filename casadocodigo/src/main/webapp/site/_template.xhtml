@@ -1,0 +1,21 @@
+<html xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <title>#{title}</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <ui:insert name="extraCss"/>
+    </h:head>
+
+    <h:body styleClass="#{bodyCss}">
+        <ui:include src="_header.xhtml"/>
+
+        <ui:insert name="body"/>
+
+
+        <ui:include src="_footer.xhtml"/>
+
+    </h:body>
+
+</html>

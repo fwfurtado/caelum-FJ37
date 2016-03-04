@@ -1,16 +1,22 @@
-<html>
-    <body>
-        <form method="post" action="#{request.getContextPath()}/j_security_check">
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+    >
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <h:form method="post" action="#{request.getContextPath()}/j_security_check" prependId="false">
             <div>
-                <label for="mail">E-mail</label>
-                <input id="mail" type="text" name="j_username" value="#{param.j_username}"/>
+                <p:outputLabel>E-mail</p:outputLabel>
+                <p:inputText id="j_username" value="#{param.j_username}"/>
             </div>
 
             <div>
-                <label for="password">Password</label>
-                <input id="password" name="j_password" value="#{param.j_password}"/>
+                <p:outputLabel>Password</p:outputLabel>
+                <p:password id="j_password" value="#{param.j_password}"/>
             </div>
-            <input type="submit" value="Login"/>
-        </form>
-    </body>
+
+            <p:commandButton accesskey="#{loginBean.login}" ajax="false"/>
+        </h:form>
+    </h:body>
 </html>

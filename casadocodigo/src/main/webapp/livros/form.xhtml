@@ -1,63 +1,110 @@
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/jsf/html ">
-<h:body>
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/jsf/html "
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 
-    <h:form enctype="multipart/form-data" prependId="false">
-        <div>
-            <h:outputLabel>Título</h:outputLabel>
-            <h:inputText value="#{adminBooksBean.product.title}" id="titulo"/>
-            <h:message for="titulo"/>
-        </div>
+    <ui:composition template="/site/_template.xhtml">
+        <ui:param name="title" value="#{msg.menuPrincipal_admin}"/>
+        <ui:param name="bodyCss" value="cart"/>
 
-        <div>
-            <h:outputLabel>Descrição</h:outputLabel>
-            <h:inputTextarea cols="20" rows="10" value="#{adminBooksBean.product.description}" id="descricao"/>
-            <h:message for="descricao"/>
-        </div>
+        <ui:define name="extraCss">
 
-        <div>
-            <h:outputLabel>Data de Lançamento</h:outputLabel>
-            <h:inputText value="#{adminBooksBean.product.releaseDate}" pt:type="date" id="date"/>
-            <h:message for="date"/>
-        </div>
+            <link rel="icon" href="//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/favicon.ico?11981592617154272979" type="image/ico" />
+            <link href="https://plus.googlecom/108540024862647200608" rel="publisher"/>
+            <link href="#{request.contextPath}/resources/css/cssbase-min.css" rel="stylesheet" type="text/css" media="all" />
+            <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'/>
+            <link href="#{request.contextPath}/resources/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/fontello-ie7.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/fontello-embedded.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/fontello.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/layout-colors.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/responsive-style.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/guia-do-programador-style.css" rel="stylesheet" type="text/css"  media="all"  />
+            <link href="#{request.contextPath}/resources/css/produtos.css" rel="stylesheet" type="text/css"  media="all"  />
+            <link rel="canonical" href="http://www.casadocodigo.com.br/" />
+        </ui:define>
 
-        <div>
-            <h:outputLabel>Nº de Páginas</h:outputLabel>
-            <h:inputText value="#{adminBooksBean.product.numberOfPages}" id="paginas"/>
+        <ui:define name="body">
 
-            <h:message for="paginas"/>
-        </div>
-
-
-        <div>
-            <h:outputLabel>Preço</h:outputLabel>
-            <h:inputText value="#{adminBooksBean.product.price}" id="preco"/>
-            <h:message for="preco"/>
-        </div>
+            <div class="ui-grid ui-grid-responsive">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"></div>
+                    <div class="ui-grid-col-4">
+                        <h:form enctype="multipart/form-data" prependId="false">
+                            <p:panelGrid columns="2" >
+                                <f:facet name="header">Novo Livro</f:facet>
 
 
-        <div>
-            <h:selectManyListbox value="#{adminBooksBean.product.authors}" converter="entityConverter" id="autores">
-                <f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author}"
-                               itemLabel="#{author.name}"/>
-            </h:selectManyListbox>
-            <h:message for="autores"/>
-        </div>
+                                <p:outputLabel>Título</p:outputLabel>
+                                <p:column>
+                                    <p:inputText value="#{adminBooksBean.product.title}" id="titulo"/>
+                                    <p:message for="titulo"/>
+                                </p:column>
 
-        <div>
-            <h:outputLabel value="Sumário do Livro"/>
-            <h:inputFile id="summary" value="#{adminBooksBean.summary}"/>
-        </div>
 
-        <div>
-            <h:outputLabel value="Capa do Livro"/>
-            <h:inputFile id="cover" value="#{adminBooksBean.cover}"/>
-        </div>
-        <h:commandButton value="Gravar" action="#{adminBooksBean.save}"/>
+                                <p:outputLabel>Descrição</p:outputLabel>
 
-    </h:form>
+                                <p:column>
+                                    <p:inputTextarea cols="20" rows="10" value="#{adminBooksBean.product.description}" id="descricao"/>
+                                    <p:message for="descricao"/>
+                                </p:column>
 
-</h:body>
+
+                                <p:outputLabel>Data de Lançamento</p:outputLabel>
+
+                                <p:column>
+                                    <p:inputText value="#{adminBooksBean.product.releaseDate}" pt:type="date" id="date"/>
+                                    <p:message for="date"/>
+                                </p:column>
+
+                                <p:outputLabel>Nº de Páginas</p:outputLabel>
+                                <p:column>
+                                    <p:inputText value="#{adminBooksBean.product.numberOfPages}" id="paginas"/>
+                                    <p:message for="paginas"/>
+                                </p:column>
+
+
+                                <p:outputLabel>Preço</p:outputLabel>
+                                <p:column>
+                                    <p:inputText value="#{adminBooksBean.product.price}" id="preco"/>
+                                    <p:message for="preco"/>
+                                </p:column>
+
+                                <p:outputLabel value="Autores"/>
+                                <p:column colspan="2">
+                                    <p:selectManyMenu id="autores" value="#{adminBooksBean.product.authors}" converter="entityConverter" filter="true" filterMatchMode="contains">
+                                        <f:selectItems value="#{adminBooksBean.authors}"
+                                                       var="author"
+                                                       itemValue="#{author}"
+                                                        itemLabel="#{author.name}"/>
+                                    </p:selectManyMenu>
+
+                                    <p:message for="autores"/>
+                                </p:column>
+
+                                <p:outputLabel value="Sumário do Livro"/>
+                                <p:column>
+                                    <p:fileUpload id="summary" value="#{adminBooksBean.summary}" label="Selecione um sumário" mode="simple" skinSimple="true"/>
+                                </p:column>
+
+                                <p:outputLabel value="Capa do Livro"/>
+                                <p:column>
+                                    <p:fileUpload id="cover" value="#{adminBooksBean.cover}" label="Selecione uma capa" mode="simple" skinSimple="true"/>
+                                </p:column>
+
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Gravar" action="#{adminBooksBean.save}"/>
+                                </f:facet>
+                            </p:panelGrid>
+                        </h:form>
+                    </div>
+                    <div class="ui-grid-col-4"></div>
+                </div>
+            </div>
+
+        </ui:define>
+    </ui:composition>
 </html>

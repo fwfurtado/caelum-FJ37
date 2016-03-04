@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.listeners.checkout;
 
+import br.com.casadocodigo.loja.configuration.ConfigureJMSDestinations;
 import br.com.casadocodigo.loja.daos.CheckoutDAO;
 import br.com.casadocodigo.loja.infra.MailSender;
 import br.com.casadocodigo.loja.models.Checkout;
@@ -19,7 +20,7 @@ import javax.jms.TextMessage;
 
 @MessageDriven(
         activationConfig = {
-                @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:/jms/topics/checkoutTopic")
+                @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = ConfigureJMSDestinations.CHECKOUT_TOPIC_JNDI)
         }
 )
 public class SendCheckoutEmailListener implements MessageListener{
@@ -38,7 +39,7 @@ public class SendCheckoutEmailListener implements MessageListener{
 
         try{
 
-            logger.info("UUID: ", textMessage.getText());
+            logger.info("Send Mail UUID: ", textMessage.getText());
 
             Checkout checkout = checkoutDAO.findByUuid(textMessage.getText());
 

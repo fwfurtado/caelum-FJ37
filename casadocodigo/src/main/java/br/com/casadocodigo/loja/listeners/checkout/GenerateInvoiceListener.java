@@ -38,7 +38,7 @@ public class GenerateInvoiceListener implements MessageListener {
         TextMessage textMessage = (TextMessage) message;
         try {
 
-            logger.info("UUID: ", textMessage.getText());
+            logger.info("Generate Invoice UUID: ", textMessage.getText());
 
             Checkout checkout = checkoutDAO.findByUuid(textMessage.getText());
 

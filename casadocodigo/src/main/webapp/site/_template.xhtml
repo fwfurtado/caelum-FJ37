@@ -15,6 +15,25 @@
 
         <ui:include src="_header.xhtml"/>
 
+
+        <script>
+            var salesChannel = new WebSocket("ws://localhost:8080#{request.contextPath}/channel/sales");
+
+            salesChannel.onmessage = function(message){
+
+
+
+                var newSale = JSON.parse(message.data);
+
+                console.log(newSale);
+
+                if( confirm("Quer participar da seguinte promoção: " + newSale.title + "?") ){
+                    document.location.href = "#{request.contextPath}/site/detalhe.xhtml?id="+newSale.bookId;
+                }
+            };
+
+        </script>
+
         <ui:insert name="body"/>
 
 

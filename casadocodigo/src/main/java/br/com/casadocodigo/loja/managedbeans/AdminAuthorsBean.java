@@ -41,14 +41,14 @@ public class AdminAuthorsBean {
 
     @Transactional
     public void save() {
-//        authorDAO.save(author);
+        authorDAO.save(author);
         authors.add(author);
     }
 
     @Transactional
     public void delete(Author author){
         authors.remove(author);
-//        authorDAO.delete(author);
+        authorDAO.delete(author);
     }
 
     @PostConstruct

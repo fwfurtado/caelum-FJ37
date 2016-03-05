@@ -1,5 +1,5 @@
 <html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui">
 <header id="layout-header" xmlns:c="http://java.sun.com/jsp/jstl/core">
     <div class="clearfix container">
         <a href="/" id="logo"> <!-- <img src="http://cdn.shopify.com/s/files/1/0155/7645/t/177/assets/casa-do-codigo-blue.svg?11981592617154272979" alt="Casa do Codigo"> -->
@@ -19,6 +19,20 @@
                             <a href="#{request.contextPath}/livros/list.xhtml">#{msg.menuPrincipal_admin}</a>
                         </li>
                     </c:if>
+
+
+                    <li>
+                        <h:form>
+                            <p:commandLink action="#{i18nBean.changeLecale('pt')}" value="#{msg.lingua_pt}" ajax="false"/>
+                        </h:form>
+                    </li>
+
+                    <li>
+                        <h:form>
+                            <p:commandLink accesskey="#{i18nBean.changeLecale('en')}" value="#{msg.lingua_en}" ajax="false"/>
+                        </h:form>
+                    </li>
+
                 </ul>
             </nav>
         </div>

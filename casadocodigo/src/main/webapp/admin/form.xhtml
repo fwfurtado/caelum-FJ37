@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+    <ui:composition template="/site/_template.xhtml">
+        <ui:param name="title" value="#{msg.menuPrincipal_admin}"/>
+        <ui:param name="bodyCss" value="cart"/>
+
+        <ui:define name="extraCss">
+
+            <link rel="icon" href="//cdn.shopify.com/s/files/1/0155/7645/t/177/assets/favicon.ico?11981592617154272979" type="image/ico" />
+            <link href="https://plus.googlecom/108540024862647200608" rel="publisher"/>
+            <link href="#{request.contextPath}/resources/css/cssbase-min.css" rel="stylesheet" type="text/css" media="all" />
+            <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'/>
+            <link href="#{request.contextPath}/resources/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/fontello-ie7.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/fontello-embedded.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/fontello.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/layout-colors.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/responsive-style.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="#{request.contextPath}/resources/css/guia-do-programador-style.css" rel="stylesheet" type="text/css"  media="all"  />
+            <link href="#{request.contextPath}/resources/css/produtos.css" rel="stylesheet" type="text/css"  media="all"  />
+            <link rel="canonical" href="http://www.casadocodigo.com.br/" />
+        </ui:define>
+
+        <ui:define name="body">
+            <div class="ui-grid ui-grid-responsive">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4"></div>
+                    <div class="ui-grid-col-4">
+                        <!--<h:form pt:method="get" pt:action="#{request.getContextPath()}/j_security" prependId="false">-->
+                        <h:form prependId="false">
+
+                            <p:panelGrid columns="2" >
+                                <f:facet name="header">Login</f:facet>
+
+                                <p:outputLabel>E-mail</p:outputLabel>
+                                <p:inputText value="#{adminUserBean.user.email}" id="email" />
+
+
+                                <p:outputLabel>Password</p:outputLabel>
+                                <p:password value="#{adminUserBean.user.password}" id="password"/>
+
+
+                                <f:facet name="footer">
+                                    <p:commandButton action="#{adminUserBean.save}" value="Gravar" update="list"/>
+                                </f:facet>
+                            </p:panelGrid>
+                        </h:form>
+
+                        <p:dataTable id="list" var="user" value="#{adminUserBean.users}" paginator="true" rows="10">
+
+                            <p:column headerText="#">
+                                <h:outputText value="${user.email}"/>
+                            </p:column>
+
+                            <p:column>
+                                <ui:repeat value="#{user.roles}" var="role" varStatus="status">
+                                    <h:outputText value="#{role.name}"/> <h:outputText value="|" rendered="#{not status.last}"/>
+                                </ui:repeat>
+                            </p:column>
+
+
+                            <p:column headerText="Ações">
+                                <p:commandLink actionListener="#{adminUserBean.delete(user)}" value="Excluir" update="list"/>
+                            </p:column>
+
+
+                        </p:dataTable>
+
+
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>
